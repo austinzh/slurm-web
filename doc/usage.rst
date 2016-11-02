@@ -71,6 +71,8 @@ There are 8 columns:
    its start time in the future.
 #. The QOS of the job
 #. The partition of the job
+#. An external link containing the cluster name and job id, optional and customizable
+   ( see "installation" )
 
 You can filter the displayed jobs by using the input above the table. All the
 shown jobs then satisfy all the filters given in the input. There is an

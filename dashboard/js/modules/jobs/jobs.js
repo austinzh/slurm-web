@@ -57,7 +57,12 @@ define([
       var context = {
         count: Object.keys(jobs).length,
         jobs: jobs
-      };
+      }
+      if (config.JOBS_XTRA_COL){
+        context["cluster"] = config.cluster.name,
+        context["columnname"] = config.JOBS_XTRA_COL.name,
+        context["condition"] = config.JOBS_XTRA_COL.cond
+       };
 
       context.jobs = result;
 
@@ -144,6 +149,12 @@ define([
             token: tokenUtils.getToken(config.cluster)
           })
         };
+
+      if(config.JOBS_XTRA_COL){
+        Handlebars.registerPartial(
+          'linkurl',
+          config.JOBS_XTRA_COL.url.replace('{{cluster}}', '{{parent.cluster}}').replace('{{jobId}}', '{{@key}}'));
+      };
 
       $(document).on('modal-job', function(e, options) {
         e.stopPropagation();

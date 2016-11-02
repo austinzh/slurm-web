@@ -83,4 +83,24 @@ define([
 
     return '-';
   });
+
+//Use handle bar helper to access parent context in a partial
+//In handlebars 2.0, this functionality will be included
+  Handlebars.registerHelper('include', function(options) {
+    var context = {},
+    mergeContext = function(obj) {
+      for(var k in obj)context[k]=obj[k];
+      };
+    mergeContext(this);
+    mergeContext(options.hash);
+    return options.fn(context);
+  });
+
+  //Comparing objects using handle bar helper
+  Handlebars.registerHelper('isEqual', function(v1, v2, options){
+    if(v1 === v2){
+      return options.fn(this);
+    }
+    return options.inverse(this);
+  });
 });

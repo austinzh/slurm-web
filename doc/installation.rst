@@ -453,6 +453,29 @@ Basic configuration file :
 
 - *LOGOURL* (String) : Define the image url in the top left-hand corner.
 
+Configuration with customizable external link (optional) :
+
+.. code-block:: json
+
+  {
+    "STARTPAGE": "jobs",
+    "REFRESH": 30000,
+    "MAXNODESLENGTH": 25,
+    "AUTOLOGIN": false,
+    "LOGOURL": "../static/logo.png",
+    "JOBS_XTRA_COL":
+    {
+     "name": "my plug-in",
+     "url":"<a target=\"_blank\" href=\"http://myplugins.edf.fr/{{cluster}}/{{jobId}}\">view infos</a>",
+     "cond":"my condition"
+    }
+  }
+
+
+An extra parameter has been added in this configuration :
+
+- *JOBS_XTRA_COL* (Object) : Define the column name and the pattern of its query string which containing cluster name and job id. "cond" defines the criteria that allows to generate the external link. Replace "my condition" by job status or "ALL" to see all the results. Results from plug-ins can be accessed via "Jobs" page.
+
 
 2D Draw ``conf/dashboard/2d.config.json``
 """""""""""""""""""""""""""""""""""""""""
