@@ -57,7 +57,7 @@ partitions and there are many running jobs.
 Then, after the charts, there is a table with one job per row. This is the list
 of all jobs running or pending on the system.
 
-There are 8 columns:
+There are 9 columns:
 
 #. The Slurm job ID
 #. The name of the user with his/her login on the system between parenthesis
@@ -71,12 +71,13 @@ There are 8 columns:
    its start time in the future.
 #. The QOS of the job
 #. The partition of the job
+#. The characterization of the workload the job belongs to (if there's one).
 #. An external link containing the cluster name and job id, optional and customizable
    ( see "installation" )
 
 You can filter the displayed jobs by using the input above the table. All the
 shown jobs then satisfy all the filters given in the input. There is an
-autocompletion mechanism on all partitions, QoS, Name, User, Nodes, State, Start Time
+autocompletion mechanism on all partitions, QoS, WCKey Name, User, Nodes, State, Start Time
 and End Time existing in the table. The filters field work in a substractive
 way.
 
@@ -141,6 +142,7 @@ are:
 #. The Slurm account used for this job
 #. The QOS of the job
 #. The partition of the job
+#. The workload characterization of the job (if defined)
 #. The exclusive flag whose value is *yes* or *no*, as requested by users at the
    job submission. If *yes*, the job get exclusive to resources on allocated
    nodes. That means that no other job could run on these nodes at the same time

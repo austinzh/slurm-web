@@ -337,7 +337,7 @@ class SlurmJob(object):
         self.cpu_freq_min = 2^32 - 2
         self.array_job_id = 0
         self.pn_min_memory = 0
-        self.wckey = None
+        self.wckey = u'Routine' if int(jobid) > 1245 else u'Confidential'
         self.burst_buffer = None
         self.time_min = 0
         self.resize_time = 0
