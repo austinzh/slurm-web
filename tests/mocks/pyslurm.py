@@ -555,13 +555,13 @@ class SlurmPartition(object):
         # settings with sane defaults
         self.billing_wights = None
         self.def_mem_per_cpu =  0
-        self.max_mem_per_cpu = 0
+        self.max_mem_per_cpu = 300
         self.allow_alloc_nodes = []
         self.min_nodes = 1
-        self.deny_accounts = []
+        self.deny_accounts = ["mrobot","wasp"] 
         self.preempt_mode = 'GANG,UNKNOWN'
         self.deny_qos = []
-        self.allow_qos = []
+        self.allow_qos = ["good"]
         self.cr_type = 0
         self.alternate = None
         self.priority = 1

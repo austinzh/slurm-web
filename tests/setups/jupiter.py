@@ -89,7 +89,8 @@ def setup_cluster():
     setup.userbase.add(User('thomas', 'curie', 'toto', []))
 
     setup.ctld = SlurmCtld(name)
-    nodeset = NodeSet('cn[001-240]')
+    nodeset = NodeSet('cn[001-120]')
+    nodeset2 = NodeSet('cn[120-240]')
 
     for nodename in nodeset:
         node = SlurmNode(nodename)
@@ -103,6 +104,13 @@ def setup_cluster():
     partition.total_cpus = 10 * partition.total_nodes
     partition.total_mem = 1 * partition.total_nodes
     setup.ctld.partitions.add(partition)
+
+    partition2 = SlurmPartition('mix')
+    partition2.nodes = str(nodeset2)
+    partition2.total_nodes = len(nodeset2)
+    partition2.total_cpus = 10 * partition.total_nodes
+    partition2.total_mem = 1 * partition.total_nodes
+    setup.ctld.partitions.add(partition2)
 
     switch = SlurmTopology('swibmaster1')
     switch.switches = 'swibleaf[1-8]'
@@ -171,7 +179,17 @@ def setup_cluster():
         job.shared = 2^16 - 2
         job.work_dir = u'/home/pierre'
         job.command = u'/home/pierre/test.sh'
-        job.partition = partition.name
+        job.partition = partition.name if int(jobid) > 1252 else partition2.name
+
+        if job.partition == 'mix':
+            partition.allow_accounts = ["neo","tstark"]
+            partition.allow_groups = ["fsociety"]
+            partition.allow_qos = []
+            partition.deny_qos = ['limit']
+            partition.max_share = None
+            partition.max_mem_per_cpu = None
+            partition.def_mem_per_cpu = 50
+
         setup.ctld.jobs.add(job)
 
         node.alloc_cpus += 1

@@ -9,9 +9,16 @@
           <tr>
             <th>Name</th>
             <th>Default</th>
+            <th>Default Time</th>
+            <th>Max Share</th>
+            <th>Priority</th>
             <th>Nodes</th>
             <th>#Nodes</th>
             <th>#CPUs</th>
+            <th>Max CPUs Per Nodes</th>
+            <th>Memory per CPU</th>
+            <th>Accounts / Groups</th>
+            <th>Qos</th>
           </tr>
         </thead>
         <tbody>
@@ -19,9 +26,31 @@
             <tr>
               <td>{{@key}}</td>
               <td>{{yesOrNo flags.Default}}</td>
+              <td>{{default_time}}</td>
+              <td>{{max_share}}</td>
+              <td>{{priority}}</td>
               <td>{{nodes}}</td>
               <td>{{total_nodes}}</td>
               <td>{{total_cpus}}</td>
+              <td>{{max_cpus_per_node}}</td>
+              <td>{{#if def_mem_per_cpu}}
+                  <span class="cellBold">Def:</span> {{def_mem_per_cpu}} {{/if}}
+                  {{#if max_mem_per_cpu}}
+                  <span class="cellBold">MAX:</span> {{max_mem_per_cpu}}{{/if}}
+              </td>
+              <td>{{#if allow_accounts}}
+                  <span class="cellBold">Allowed:</span> {{allow_accounts}} {{/if}}
+                  {{#if deny_accounts}}
+                  <span class="cellBold">Denied:</span> {{deny_accounts}} {{/if}}
+                  {{#if allow_groups}}
+                  <span class="cellBold">Allowed Groups:</span> {{allow_groups}}{{/if}}
+              </td>
+              <td>{{#if allow_qos}}
+                  <span class="cellBold">Allowed:</span> {{allow_qos}} {{/if}} 
+                  {{#if deny_qos}}
+                  <span class="cellBold">Denied:</span> {{deny_qos}}{{/if}}
+              </td>
+              
             </tr>
           {{/each}}
         </tbody>
